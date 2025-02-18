@@ -1,5 +1,5 @@
 from rich import print
-from provider import client, model_id
+from provider import client_beta, model_id
 
 
 messages = [
@@ -10,13 +10,14 @@ messages = [
     {
         "role": "assistant",
         "content": "```python\n",
+        "prefix": True,
         "partial": True
     }
 ]
 
-completion = client.chat.completions.create(
+completion = client_beta.chat.completions.create(
     model=model_id,
     messages=messages,
-    stop=["````"]
+    stop=["```"]
 )
 print(completion.choices[0].message.content)
