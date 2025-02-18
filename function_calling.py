@@ -7,16 +7,17 @@ from provider import model_id, client
 
 
 ## tool functions implementation
-import random
+from amap import weather_info
 from datetime import datetime
 
-# TODO query for weather condition
+# query for weather condition
 #   `arguments`: {"location": "Shanghai"}
 def get_current_weather(arguments):
-    weather_conditions = ["晴天", "多云", "雨天"]
-    random_weather = random.choice(weather_conditions)
     location = arguments["location"]
-    return f"{location}今天天气是{random_weather}。"
+    info = weather_info(location)
+    weather = info["lives"][0]["weather"] if info else "未知"
+
+    return f"{location}今天天气是{weather}。"
 
 # query for current time
 def get_current_time():

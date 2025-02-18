@@ -11,10 +11,10 @@ base_url = "https://restapi.amap.com/v3/weather/weatherInfo"
 
 def weather_info(city: str) -> dict | None:
     """
-    获取指定城市的天气信息
+    get weather info for city
 
-    :param city: 城市名称或城市编码
-    :return: 包含天气信息的字典
+    :param city: city name or adcode
+    :return: a `dict` containing weather info
     """
     params = {
         'key': api_key,
