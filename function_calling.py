@@ -85,15 +85,16 @@ def function_call():
         model=model_id,
         messages=messages, # type: ignore
         tools=tools, # type: ignore
-        parallel_tool_calls=True
+        parallel_tool_calls=True # `tool_call_id` is required by deepseek
     )
     print(completion.choices[0].message.model_dump_json())
     return completion
 
 completion = function_call()
 if completion.choices[0].message.tool_calls:
-    function_name = completion.choices[0].message.tool_calls[0].function.name
-    arguments_string = completion.choices[0].message.tool_calls[0].function.arguments
+    tool_call = completion.choices[0].message.tool_calls[0]
+    function_name = tool_call.function.name
+    arguments_string = tool_call.function.arguments
 
     f = function_mapper[function_name]
     args = json.loads(arguments_string)
@@ -104,7 +105,13 @@ if completion.choices[0].message.tool_calls:
         output = f(args)
 
     messages.append(completion.choices[0].message) # type: ignore
-    messages.append({"role": "tool", "content": output})
+    messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
 
-    completion = function_call()
+    # feed tool's result to model to get more human-like generation
+    completion = client.chat.completions.create(
+        model=model_id,
+        messages=messages, # type: ignore
+        tools=tools, # type: ignore
+        tool_choice="none" # required by deepseek
+    )
     print(completion.choices[0].message.content)
