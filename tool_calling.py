@@ -1,4 +1,4 @@
-# function calling document from aliyun;
+# function calling document from aliyun:
 # https://help.aliyun.com/zh/model-studio/user-guide/qwen-function-calling
 
 import json
