@@ -19,7 +19,7 @@ class PartialModeRunner(Runner):
             }
         ]
 
-        completion = self.chat_completion()
+        completion = self.chat_completion(beta=True)
         print(completion.choices[0].message.content) # type: ignore
 
 
