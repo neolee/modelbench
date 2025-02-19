@@ -42,6 +42,7 @@ aliyun_deepseek = Provider(
     "deepseek-r1"
 )
 
+providers = [deepseek, aliyun_qwen, aliyun_deepseek]
 provider = aliyun_qwen
 
 
