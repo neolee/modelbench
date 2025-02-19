@@ -1,23 +1,30 @@
 from rich import print
-from provider import client_beta, model_id
+from runner import Runner
 
 
-messages = [
-    {
-        "role": "user",
-        "content": "Please write quick sort code"
-    },
-    {
-        "role": "assistant",
-        "content": "```python\n",
-        "prefix": True,
-        "partial": True
-    }
-]
+class PrefixCompletionRunner(Runner):
+    def run(self):
+        self.messages = [
+            {
+                "role": "user",
+                "content": "Please write quick sort code"
+            },
+            {
+                "role": "assistant",
+                "content": "```python\n",
+                "prefix": True,
+                "partial": True
+            }
+        ]
 
-completion = client_beta.chat.completions.create(
-    model=model_id,
-    messages=messages,
-    stop=["```"]
-)
-print(completion.choices[0].message.content)
+        completion = self.client_beta.chat.completions.create(
+            model=self.model_id,
+            messages=self.messages,
+            stop=["```"]
+        )
+        print(completion.choices[0].message.content)
+
+
+if __name__ == "__main__":
+    r = PrefixCompletionRunner()
+    r.run()
