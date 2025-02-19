@@ -1,6 +1,7 @@
 class Provider:
-    def __init__(self, api_key_name, base_url, beta_base_url,
+    def __init__(self, desc, api_key_name, base_url, beta_base_url,
                  chat_model_id, coder_model_id, reasoner_model_id) -> None:
+        self.desc = desc
         self.api_key_name = api_key_name
         self.base_url = base_url
         self.beta_base_url = beta_base_url
@@ -10,6 +11,7 @@ class Provider:
 
 
 deepseek = Provider(
+    "DeepSeek Official",
     "DEEPSEEK_API_KEY",
     "https://api.deepseek.com",
     "https://api.deepseek.com/beta",
@@ -19,6 +21,7 @@ deepseek = Provider(
 )
 
 aliyun_qwen = Provider(
+    "Qwen Official (Aliyun)",
     "ALIYUN_API_KEY",
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
@@ -28,6 +31,7 @@ aliyun_qwen = Provider(
 )
 
 aliyun_deepseek = Provider(
+    "DeepSeek (Aliyun)",
     "ALIYUN_API_KEY",
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
@@ -37,6 +41,7 @@ aliyun_deepseek = Provider(
 )
 
 ecnu_deepseek = Provider(
+    "DeepSeek-R1 (ECNU)",
     "ECNU_API_KEY",
     "https://chat.ecnu.edu.cn/open/api/v1",
     "https://chat.ecnu.edu.cn/open/api/v1",
