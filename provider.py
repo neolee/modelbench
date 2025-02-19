@@ -42,7 +42,16 @@ aliyun_deepseek = Provider(
     "deepseek-r1"
 )
 
-providers = [deepseek, aliyun_qwen, aliyun_deepseek]
+ecnu_deepseek = Provider(
+    "ECNU_API_KEY",
+    "https://chat.ecnu.edu.cn/open/api/v1",
+    "https://chat.ecnu.edu.cn/open/api/v1",
+    "ecnu-max",
+    "",
+    "ecnu-reasoner"
+)
+
+providers = [deepseek, aliyun_qwen, aliyun_deepseek, ecnu_deepseek]
 provider = aliyun_qwen
 
 
