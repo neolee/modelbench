@@ -3,6 +3,8 @@ from runner import Runner
 
 
 class GetModelsRunner(Runner):
+    desc = "Get Model List"
+
     def run(self):
         print(self.client.models.list())
 

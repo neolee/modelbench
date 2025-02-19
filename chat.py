@@ -2,6 +2,8 @@ from runner import Runner
 
 
 class ChatRunner(Runner):
+    desc = "Basic Chat"
+
     def run(self):
         while True:
             new_message = {"role": "assistant", "content": ""}

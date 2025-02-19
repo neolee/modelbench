@@ -4,6 +4,8 @@ from runner import Runner
 
 
 class JSONOutputRunner(Runner):
+    desc = "JSON Output"
+
     def run(self):
         self.system_prompt = """
         The user will provide some exam text. Please parse the "question" and "answer" and output them in JSON format.

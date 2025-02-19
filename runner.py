@@ -6,6 +6,8 @@ from provider import Provider, default_provider
 
 
 class Runner(ABC):
+    desc = "Abstract"
+
     def __init__(self, provider: Provider=default_provider) -> None:
         self.provider = provider
         self.api_key = os.environ.get(provider.api_key_name)

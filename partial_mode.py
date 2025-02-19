@@ -3,6 +3,8 @@ from runner import Runner
 
 
 class PartialModeRunner(Runner):
+    desc = "Partial Mode"
+
     def run(self):
         self.messages = [
             {

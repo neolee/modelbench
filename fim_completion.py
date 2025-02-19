@@ -3,6 +3,8 @@ from runner import Runner
 
 
 class FIMCompletion(Runner):
+    desc = "FIM Completion"
+
     def run(self):
         # for now only work on DeepSeek beta server
         try:

@@ -2,7 +2,9 @@ from rich import print
 from runner import Runner
 
 
-class ReasonerRunner(Runner):
+class ReasoningRunner(Runner):
+    desc = "Reasoning"
+
     def run(self):
         self.messages = []
 
@@ -37,5 +39,5 @@ class ReasonerRunner(Runner):
 
 
 if __name__ == "__main__":
-    r = ReasonerRunner()
+    r = ReasoningRunner()
     r.run()

@@ -33,6 +33,8 @@ function_mapper = {
 
 
 class ToolCallingRunner(Runner):
+    desc = "Tool Calling"
+
     def run(self):
         ## tools definition for language model
         tools = [
