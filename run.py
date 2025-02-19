@@ -25,6 +25,7 @@ def main():
             if not runner_class: break
             runner = runner_class(provider) # type: ignore
             runner.run()
+            print()
 
 
 if __name__ == "__main__":
