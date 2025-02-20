@@ -1,4 +1,5 @@
 from rich import print
+from rich.console import Console
 from menu import show_menu_of
 from provider import Provider, providers
 from runner import Runner
@@ -16,6 +17,8 @@ def show_menu_of_runners() -> Runner | None:
     return runners[idx]
 
 
+console = Console()
+
 def main():
     while True:
         provider = show_menu_of_providers()
@@ -24,7 +27,9 @@ def main():
             runner_class = show_menu_of_runners()
             if not runner_class: break
             runner = runner_class(provider) # type: ignore
+            console.rule(f"[bold red]Running {runner_class.desc}")
             runner.run()
+            console.rule(f"[bold red]End of {runner_class.desc}")
             print()
 
 
