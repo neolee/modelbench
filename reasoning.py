@@ -25,7 +25,7 @@ class ReasoningRunner(Runner):
                     print(s, end="", flush=True)
                     content += s
 
-                self.messages.append({"role": "assistant", "content": content})
+            self.messages.append({"role": "assistant", "content": content})
 
         # round 1
         q1 = "9.11 and 9.8, which is greater?"
