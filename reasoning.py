@@ -14,7 +14,9 @@ class ReasoningRunner(Runner):
 
             reasoning_content = ""
             content = ""
+            is_answering = False
 
+            print("\n" + "<thinking>")
             for chunk in completion:
                 r = chunk.choices[0].delta.reasoning_content # type: ignore
                 s = chunk.choices[0].delta.content # type: ignore
@@ -22,16 +24,18 @@ class ReasoningRunner(Runner):
                     print(r, end="", flush=True)
                     reasoning_content += r
                 elif s:
+                    if not is_answering:
+                        print("\n" + "</thinking>" + "\n")
+                        is_answering = True
                     print(s, end="", flush=True)
                     content += s
 
             self.messages.append({"role": "assistant", "content": content})
+            print()
 
         # round 1
         q1 = "9.11 and 9.8, which is greater?"
         reasoning(q1)
-
-        print("\n")
 
         # round 2
         q2 = "How many Rs are there in the word 'strawberry'?"
