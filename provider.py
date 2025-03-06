@@ -50,5 +50,15 @@ ecnu_deepseek = Provider(
     "ecnu-reasoner"
 )
 
-providers = [deepseek, aliyun_qwen, aliyun_deepseek, ecnu_deepseek]
+lmstudio = Provider(
+    "LM Studio Local",
+    "lmstudio",
+    "http://127.0.0.1:1234/v1",
+    "http://127.0.0.1:1234/v1",
+    "default",
+    "default",
+    "default"
+)
+
+providers = [deepseek, aliyun_qwen, aliyun_deepseek, ecnu_deepseek, lmstudio]
 default_provider = aliyun_qwen
