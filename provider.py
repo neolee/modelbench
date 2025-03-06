@@ -16,7 +16,7 @@ deepseek = Provider(
     "https://api.deepseek.com",
     "https://api.deepseek.com/beta",
     "deepseek-chat",
-    "",
+    "deepseek-chat",
     "deepseek-reasoner"
 )
 
@@ -27,7 +27,7 @@ aliyun_qwen = Provider(
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "qwen-max-latest",
     "qwen-coder-plus-latest",
-    ""
+    "qwq-plus-latest"
 )
 
 aliyun_deepseek = Provider(
@@ -36,7 +36,7 @@ aliyun_deepseek = Provider(
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "deepseek-v3",
-    "",
+    "deepseek-v3",
     "deepseek-r1"
 )
 
