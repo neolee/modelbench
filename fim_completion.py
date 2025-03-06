@@ -6,13 +6,7 @@ class FIMCompletion(Runner):
     desc = "FIM Completion"
 
     def run(self):
-        # for now only work on DeepSeek beta server
-        try:
-            assert self.model_id == "deepseek-chat", "This test is for DeepSeek beta server only"
-        except AssertionError as msg:
-            print(msg)
-            exit()
-
+        # for now only work on deepseek beta server
         self.messages = [
             {"role": "user", "content": "Please write quick sort code"},
             {"role": "assistant", "content": "```python\n", "prefix": True}

@@ -28,7 +28,11 @@ def main():
             if not runner_class: break
             runner = runner_class(provider) # type: ignore
             console.rule(f"[bold red]Running {runner_class.desc}")
-            runner.run()
+            try:
+                runner.run()
+            except Exception as e:
+                print(f"'{runner_class.desc}' test failed on '{provider.desc}' (detail below).\n")
+                print(e)
             console.rule(f"[bold red]End of {runner_class.desc}")
             print()
 
