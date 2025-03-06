@@ -65,6 +65,12 @@ class Runner(ABC):
             stream=stream
         )
 
+    def clear_messages(self):
+        self.messages.clear()
+
+    def add_message(self, role, message):
+        self.messages.append({"role": role, "content": message})
+
     @abstractmethod
     def run(self):
         pass

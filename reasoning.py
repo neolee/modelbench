@@ -6,10 +6,10 @@ class ReasoningRunner(Runner):
     desc = "Reasoning"
 
     def run(self):
-        self.messages = []
+        self.clear_messages()
 
         def reasoning(q: str):
-            self.messages.append({"role": "user", "content": q})
+            self.add_message("user", q)
             completion = self.reasoning_completion(stream=True)
 
             reasoning_content = ""
@@ -30,7 +30,7 @@ class ReasoningRunner(Runner):
                     print(s, end="", flush=True)
                     content += s
 
-            self.messages.append({"role": "assistant", "content": content})
+            self.add_message("assistant", content)
             print()
 
         # round 1

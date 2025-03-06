@@ -6,20 +6,20 @@ class ChatRunner(Runner):
 
     def run(self):
         while True:
-            new_message = {"role": "assistant", "content": ""}
+            new_message = ""
             completion = self.chat_completion(stream=True)
             for chunk in completion:
                 s = chunk.choices[0].delta.content # type: ignore
                 print(s or "", end="", flush=True)
-                if s: new_message["content"] += s
+                if s: new_message += s
 
             print()
-            self.messages.append(new_message)
+            self.add_message("assistant", new_message)
             print()
 
             q = input("> ")
             if q in [':q', ':x', ':quit', ':exit', 'bye']: break
-            self.messages.append({"role": "user", "content": q})
+            self.add_message("user", q)
 
 
 if __name__ == "__main__":
