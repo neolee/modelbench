@@ -42,7 +42,7 @@ class Runner(ABC):
                 {"role": "system", "content": self.system_message},
                 {"role": "user", "content": q}
             ],
-            temperature=0.7
+            temperature=self.temperature
         )
 
     def chat_completion(self, beta: bool=False, model_type: str="chat", stream=False) -> ChatCompletion | Stream[ChatCompletionChunk]:
