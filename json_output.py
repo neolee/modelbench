@@ -25,12 +25,32 @@ class JSONOutputRunner(Runner):
         self.messages = [{"role": "system", "content": self.system_prompt},
                          {"role": "user", "content": q}]
 
+        # `response_format` for DeepSeek, Qwen
+        json_object = {
+            "type": "json_object",
+        }
+
+        # `response_format` for Qwen, LM Studio API
+        json_schema = {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "session",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "question": {"type": "string"},
+                        "answer": {"type": "string"},
+                    },
+                    "required": ["question", "answer"],
+                },
+                "required": ["session"],
+            }
+        }
+
         completion = self.client.chat.completions.create(
             model=self.model_id,
             messages=self.messages, # type: ignore
-            response_format={
-                'type': 'json_object'
-            }
+            response_format=json_object # type: ignore
         )
 
         s = completion.choices[0].message.content
