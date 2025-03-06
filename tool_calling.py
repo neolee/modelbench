@@ -115,7 +115,6 @@ class ToolCallingRunner(Runner):
                 model=self.model_id,
                 messages=self.messages, # type: ignore
                 tools=tools, # type: ignore
-                tool_choice="none" # required by deepseek
             )
             print(completion.choices[0].message.content)
 
