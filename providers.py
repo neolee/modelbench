@@ -16,13 +16,15 @@ class Provider:
 with open("providers.toml", "r") as f:
     data = rtoml.load(f)
 
-providers = []
-for p in data["providers"]:
-    config = data["providers"][p]
-    providers.append(Provider(config))
-
 default_provider_name: str = data["default"]["provider"]
-default_provider_config: dict = data["providers"][default_provider_name]
-default_provider = Provider(default_provider_config)
-
 default_model_type: str = data["default"]["model_type"]
+
+def provider_by_name(name: str=default_provider_name) -> Provider:
+    config: dict = data["providers"][name]
+    return Provider(config)
+
+default_provider = provider_by_name()
+
+providers = []
+for name in data["providers"]:
+    providers.append(provider_by_name(name))
