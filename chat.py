@@ -2,7 +2,7 @@ from runner import Runner
 
 
 class ChatRunner(Runner):
-    desc = "Basic Chat"
+    description = "Basic Chat"
 
     def run(self):
         while True:

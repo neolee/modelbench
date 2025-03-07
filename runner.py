@@ -2,19 +2,18 @@ import os
 from abc import ABC, abstractmethod
 from openai import OpenAI, Stream
 from openai.types.chat import ChatCompletion, ChatCompletionChunk
-from provider import Provider, default_provider
+from providers import Provider, default_provider, default_model_type
 
 
 class Runner(ABC):
-    desc = "Abstract"
+    description = "Abstract"
 
     def __init__(self, provider: Provider=default_provider) -> None:
         self.provider = provider
-        self.api_key = os.environ.get(provider.api_key_name)
-        self.client = OpenAI(api_key=self.api_key, base_url=provider.base_url)
+        self.client = OpenAI(api_key=provider.api_key, base_url=provider.base_url)
         if provider.beta_base_url:
-            self.client_beta = OpenAI(api_key=self.api_key, base_url=provider.beta_base_url)
-        self.model_id = provider.chat_model_id
+            self.client_beta = OpenAI(api_key=provider.api_key, base_url=provider.beta_base_url)
+        self.model_id = self.model_id_from_type(default_model_type)
 
         self.welcome_message = "Introduce yourself to someone opening this program for the first time. Be concise."
         self.system_message = "You are a helpful assistant."
@@ -24,7 +23,7 @@ class Runner(ABC):
             {"role": "user", "content": self.welcome_message},
         ]
 
-    def model_id_from_type(self, model_type: str="chat") -> str:
+    def model_id_from_type(self, model_type: str=default_model_type) -> str:
         match model_type:
             case "coder": return self.provider.coder_model_id
             case "reasoner": return self.provider.reasoner_model_id
@@ -33,7 +32,7 @@ class Runner(ABC):
     def get_models(self):
         return self.client.models.list()
 
-    def simple_chat_completion(self, q: str, beta: bool=False, model_type: str="chat") -> ChatCompletion:
+    def simple_chat_completion(self, q: str, beta: bool=False, model_type: str=default_model_type) -> ChatCompletion:
         c = self.client_beta if beta and self.client_beta else self.client
         model_id = self.model_id_from_type(model_type)
         return c.chat.completions.create(
@@ -45,7 +44,7 @@ class Runner(ABC):
             temperature=self.temperature
         )
 
-    def chat_completion(self, beta: bool=False, model_type: str="chat", stream=False) -> ChatCompletion | Stream[ChatCompletionChunk]:
+    def chat_completion(self, beta: bool=False, model_type: str=default_model_type, stream=False) -> ChatCompletion | Stream[ChatCompletionChunk]:
         c = self.client_beta if beta and self.client_beta else self.client
         model_id = self.model_id_from_type(model_type)
 

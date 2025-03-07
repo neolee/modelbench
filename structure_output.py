@@ -57,14 +57,14 @@ class StructureOutputRunner(Runner):
 
 
 class JSONObjectRunner(StructureOutputRunner):
-    desc = "Structured Output Type 1"
+    description = "Structured Output Type 1"
 
     def run(self):
         self._run_with_response_format(json_object)
 
 
 class JSONSchemaRunner(StructureOutputRunner):
-    desc = "Structured Output Type 2"
+    description = "Structured Output Type 2"
 
     def run(self):
         self._run_with_response_format(json_schema)

@@ -3,7 +3,7 @@ from runner import Runner
 
 
 class ReasoningRunner(Runner):
-    desc = "Reasoning"
+    description = "Reasoning"
 
     def run(self):
         self.clear_messages()

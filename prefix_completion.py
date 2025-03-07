@@ -3,7 +3,7 @@ from runner import Runner
 
 
 class PrefixCompletionRunner(Runner):
-    desc = "Prefix Completion"
+    description = "Prefix Completion"
 
     def run(self):
         self.messages = [

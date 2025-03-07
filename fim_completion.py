@@ -3,7 +3,7 @@ from runner import Runner
 
 
 class FIMCompletion(Runner):
-    desc = "FIM Completion"
+    description = "FIM Completion"
 
     def run(self):
         # for now only work on deepseek beta server

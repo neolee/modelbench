@@ -1,7 +1,7 @@
 from rich import print
 from rich.console import Console
 from menu import show_menu_of
-from provider import Provider, providers
+from providers import Provider, providers
 from runner import Runner
 from runners import runners
 
@@ -27,13 +27,13 @@ def main():
             runner_class = show_menu_of_runners()
             if not runner_class: break
             runner = runner_class(provider) # type: ignore
-            console.rule(f"[bold red]Running {runner_class.desc}")
+            console.rule(f"[bold red]Running {runner_class.description}")
             try:
                 runner.run()
             except Exception as e:
-                print(f"'{runner_class.desc}' test failed on '{provider.desc}' (detail below).\n")
+                print(f"'{runner_class.description}' test failed on '{provider.description}' (detail below).\n")
                 print(e)
-            console.rule(f"[bold red]End of {runner_class.desc}")
+            console.rule(f"[bold red]End of {runner_class.description}")
             print()
 
 
