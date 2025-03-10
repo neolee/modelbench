@@ -1,12 +1,14 @@
 from rich import print
+
 from runner import Runner
+from mal.openai.model import chat_completion_content
 
 
 class PartialModeRunner(Runner):
     description = "Partial Mode"
 
     def run(self):
-        self.messages = [
+        messages = [
             {
                 "role": "user",
                 "content": "请对“春天来了，大地”这句话进行续写，来表达春天的美好和作者的喜悦之情"
@@ -19,8 +21,11 @@ class PartialModeRunner(Runner):
             }
         ]
 
-        completion = self.chat_completion(beta=True)
-        print(completion.choices[0].message.content) # type: ignore
+        completion = self.create_chat_completion(
+            messages,
+            is_beta=True
+        )
+        print(chat_completion_content(completion))
 
 
 if __name__ == "__main__":

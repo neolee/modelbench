@@ -6,7 +6,7 @@ class GetModelsRunner(Runner):
     description = "Get Model List"
 
     def run(self):
-        print(self.client.models.list())
+        print(self.get_models())
 
 
 if __name__ == "__main__":

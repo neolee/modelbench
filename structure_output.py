@@ -1,6 +1,8 @@
 import json
 from rich import print
+
 from runner import Runner
+from mal.openai.model import append_message, chat_completion_content
 
 
 system_message = """
@@ -42,16 +44,16 @@ json_schema = {
 
 class StructureOutputRunner(Runner):
     def _run_with_response_format(self, response_format):
-        self.messages = [{"role": "system", "content": system_message},
-                         {"role": "user", "content": q}]
+        messages = []
+        append_message(messages, "system", system_message)
+        append_message(messages, "user", q)
 
-        completion = self.client.chat.completions.create(
-            model=self.model_id,
-            messages=self.messages, # type: ignore
-            response_format=response_format # type: ignore
+        completion = self.create_chat_completion(
+            messages,
+            response_format=response_format
         )
 
-        s = completion.choices[0].message.content
+        s = chat_completion_content(completion)
         print(s)
         if s: print(json.loads(s))
 

@@ -1,5 +1,8 @@
 from rich import print
+
 from runner import Runner
+from mal.providers import provider_by_alias
+from mal.openai.model import completion_text
 
 
 class FIMCompletion(Runner):
@@ -7,20 +10,15 @@ class FIMCompletion(Runner):
 
     def run(self):
         # for now only work on deepseek beta server
-        self.messages = [
-            {"role": "user", "content": "Please write quick sort code"},
-            {"role": "assistant", "content": "```python\n", "prefix": True}
-        ]
-
-        completion = self.client_beta.completions.create(
-            model=self.model_id,
+        completion = self.create_completion(
+            is_beta=True,
             prompt="def fib(a):",
             suffix="    return fib(a-1) + fib(a-2)",
             max_tokens=128
         )
-        print(completion.choices[0].text)
+        print(completion_text(completion))
 
 
 if __name__ == "__main__":
-    r = FIMCompletion()
+    r = FIMCompletion(provider_by_alias("deepseek"))
     r.run()
