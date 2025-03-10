@@ -1,7 +1,7 @@
 from rich import print
 from rich.console import Console
 from menu import show_menu_of
-from providers import Provider, providers
+from mal.providers import Provider, providers
 from runner import Runner
 from runners import runners
 
