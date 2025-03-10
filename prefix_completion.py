@@ -22,7 +22,8 @@ class PrefixCompletionRunner(Runner):
         ]
 
         completion = self.create_chat_completion(
-            messages=messages,
+            messages,
+            is_beta=True,
             stop=["```"]
         )
         print(chat_completion_content(completion))
