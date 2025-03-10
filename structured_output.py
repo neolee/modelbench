@@ -42,7 +42,7 @@ json_schema = {
 }
 
 
-class StructureOutputRunner(Runner):
+class StructuredOutputRunner(Runner):
     def _run_with_response_format(self, response_format):
         messages = []
         append_message(messages, "system", system_message)
@@ -58,14 +58,14 @@ class StructureOutputRunner(Runner):
         if s: print(json.loads(s))
 
 
-class JSONObjectRunner(StructureOutputRunner):
+class JSONObjectRunner(StructuredOutputRunner):
     description = "Structured Output Type 1"
 
     def run(self):
         self._run_with_response_format(json_object)
 
 
-class JSONSchemaRunner(StructureOutputRunner):
+class JSONSchemaRunner(StructuredOutputRunner):
     description = "Structured Output Type 2"
 
     def run(self):
