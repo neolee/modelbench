@@ -2,7 +2,7 @@ import os
 from abc import ABC, abstractmethod
 from openai import OpenAI, Stream
 from openai.types.chat import ChatCompletion, ChatCompletionChunk
-from providers import Provider, default_provider
+from mal.providers import Provider, default_provider
 
 
 class Runner(ABC):
