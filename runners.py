@@ -1,6 +1,6 @@
 from get_models import GetModelsRunner
 from chat import ChatRunner
-from structure_output import JSONObjectRunner, JSONSchemaRunner
+from structured_output import JSONObjectRunner, JSONSchemaRunner
 from partial_mode import PartialModeRunner
 from prefix_completion import PrefixCompletionRunner
 from fim_completion import FIMCompletion

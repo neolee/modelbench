@@ -4,7 +4,7 @@ Running feature tests on different LLMs easily.
 
 - List all models
 - Basic chat w/ stream mode
-- Structure output (`json_object` and `json_schema` mode)
+- Structured output (`json_object` and `json_schema` mode)
 - Partial mode
 - Prefix completion
 - FIM (*Fill In the Middle*) completion
