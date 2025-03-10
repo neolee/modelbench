@@ -1,25 +1,38 @@
 from runner import Runner
+from mal.openai.model import append_message, chat_completion_chunk_content
 
 
 class ChatRunner(Runner):
     description = "Basic Chat"
 
     def run(self):
+        messages = [
+            {
+                "role": "system",
+                "content": "Introduce yourself to someone opening this program for the first time. Be concise."
+            },
+            {
+                "role": "user",
+                "content": "You are a helpful assistant."
+            },
+        ]
+
         while True:
             new_message = ""
-            completion = self.chat_completion(stream=True)
+
+            completion = self.create_chat_completion(messages, stream=True)
             for chunk in completion:
-                s = chunk.choices[0].delta.content # type: ignore
+                s = chat_completion_chunk_content(chunk)
                 print(s or "", end="", flush=True)
                 if s: new_message += s
 
             print()
-            self.add_message("assistant", new_message)
+            append_message(messages, "assistant", new_message)
             print()
 
             q = input("> ")
             if q in [':q', ':x', ':quit', ':exit', 'bye']: break
-            self.add_message("user", q)
+            append_message(messages, "user", q)
 
 
 if __name__ == "__main__":

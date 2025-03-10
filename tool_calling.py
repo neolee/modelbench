@@ -3,7 +3,9 @@
 
 import json
 from rich import print
+
 from runner import Runner
+from mal.openai.model import chat_completion_content, chat_completion_json, chat_completion_tool_calls, chat_completion_message
 
 
 ## tool functions implementation
@@ -65,17 +67,17 @@ class ToolCallingRunner(Runner):
         ]
 
         ## system message and query
-        sm = """
+        system_message = """
         你是一个很有帮助的助手。
         如果用户提问关于天气的问题，请调用 ‘get_current_weather’ 函数；
         如果用户提问关于时间的问题，请调用 ‘get_current_time’ 函数。
         请以友好的语气回答问题。
         """
 
-        self.messages = [
+        messages = [
             {
                 "role": "system",
-                "content": sm,
+                "content": system_message,
             },
             {
                 "role": "user",
@@ -84,18 +86,18 @@ class ToolCallingRunner(Runner):
         ]
 
         def function_call():
-            completion = self.client.chat.completions.create(
-                model=self.model_id,
-                messages=self.messages, # type: ignore
-                tools=tools, # type: ignore
+            completion = self.create_chat_completion(
+                messages,
+                tools=tools,
                 parallel_tool_calls=True # `tool_call_id` is required by deepseek
             )
-            print(completion.choices[0].message.model_dump_json())
+            print(chat_completion_json(completion))
             return completion
 
         completion = function_call()
-        if completion.choices[0].message.tool_calls:
-            tool_call = completion.choices[0].message.tool_calls[0]
+        tool_calls = chat_completion_tool_calls(completion)
+        if tool_calls:
+            tool_call = tool_calls[0]
             function_name = tool_call.function.name
             arguments_string = tool_call.function.arguments
 
@@ -107,16 +109,15 @@ class ToolCallingRunner(Runner):
             else:
                 output = f(args)
 
-            self.messages.append(completion.choices[0].message) # type: ignore
-            self.messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
+            messages.append(chat_completion_message(completion)) # type: ignore
+            messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
 
             # feed tool's result to model to get more human-like generation
-            completion = self.client.chat.completions.create(
-                model=self.model_id,
-                messages=self.messages, # type: ignore
+            completion = self.create_chat_completion(
+                messages, # type: ignore
                 tools=tools, # type: ignore
             )
-            print(completion.choices[0].message.content)
+            print(chat_completion_content(completion))
 
 
 if __name__ == "__main__":

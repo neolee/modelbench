@@ -1,16 +1,22 @@
 from rich import print
+
 from runner import Runner
+from mal.openai.model import append_message, chat_completion_chunk_content, chat_completion_chunk_reasoning_content
 
 
 class ReasoningRunner(Runner):
     description = "Reasoning"
 
     def run(self):
-        self.clear_messages()
+        messages = []
 
         def reasoning(q: str):
-            self.add_message("user", q)
-            completion = self.reasoning_completion(stream=True)
+            append_message(messages, "user", q)
+            completion = self.create_chat_completion(
+                messages,
+                model_type="reasoner",
+                stream=True
+            )
 
             reasoning_content = ""
             content = ""
@@ -18,8 +24,8 @@ class ReasoningRunner(Runner):
 
             print("\n" + "<thinking>")
             for chunk in completion:
-                r = chunk.choices[0].delta.reasoning_content # type: ignore
-                s = chunk.choices[0].delta.content # type: ignore
+                r = chat_completion_chunk_reasoning_content(chunk)
+                s = chat_completion_chunk_content(chunk)
                 if r:
                     print(r, end="", flush=True)
                     reasoning_content += r
@@ -30,7 +36,7 @@ class ReasoningRunner(Runner):
                     print(s, end="", flush=True)
                     content += s
 
-            self.add_message("assistant", content)
+            append_message(messages, "assistant", content)
             print()
 
         # round 1
