@@ -4,15 +4,22 @@ log.txt
 **/log.txt
 **/*.log
 
-.aider*
-
-.idea
-
-.python-version
 .ipynb_checkpoints/
 **/.ipynb_chechpoints
-__pycache__
+__pycache__/
 **/__pycache__
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
 
-chroma_db
+.venv
+
+.aider*
+.idea
+
+.logfire
+
+local
 db
