@@ -1,4 +1,3 @@
-import os
 from abc import ABC, abstractmethod
 
 from mal.providers import Provider, default_provider, default_model_type
