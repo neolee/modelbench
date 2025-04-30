@@ -20,18 +20,23 @@ class ReasoningRunner(Runner):
 
             reasoning_content = ""
             content = ""
+            is_thinking = False
             is_answering = False
 
-            print("\n" + "<thinking>")
             for chunk in completion:
                 r = chat_completion_chunk_reasoning_content(chunk)
                 s = chat_completion_chunk_content(chunk)
                 if r:
+                    if not is_thinking:
+                        print("<thinking>")
+                        is_thinking = True
                     print(r, end="", flush=True)
                     reasoning_content += r
                 elif s:
                     if not is_answering:
-                        print("\n" + "</thinking>" + "\n")
+                        if is_thinking:
+                            print("\n" + "</thinking>" + "\n")
+                            is_thinking = False
                         is_answering = True
                     print(s, end="", flush=True)
                     content += s
@@ -44,6 +49,7 @@ class ReasoningRunner(Runner):
         reasoning(q1)
 
         # round 2
+        print()
         q2 = "How many Rs are there in the word 'strawberry'?"
         reasoning(q2)
 
