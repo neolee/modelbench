@@ -2,7 +2,7 @@ import json
 from rich import print
 
 from runner import Runner
-from mal.openai.model import append_message, chat_completion_content
+from mal.openai.model import append_message, chat_completion_chunk_content
 
 
 system_message = """
@@ -50,12 +50,17 @@ class StructuredOutputRunner(Runner):
 
         completion = self.create_chat_completion(
             messages,
+            stream=True,
             response_format=response_format
         )
 
-        s = chat_completion_content(completion)
-        print(s)
-        if s: print(json.loads(s))
+        result_output = ""
+        for chunk in completion:
+            s = chat_completion_chunk_content(chunk)
+            print(s or "", end="", flush=True)
+            if s: result_output += s
+
+        if result_output: print(json.loads(result_output))
 
 
 class JSONObjectRunner(StructuredOutputRunner):
