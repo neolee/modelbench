@@ -1,5 +1,10 @@
+from rich.console import Console
+from rich.live import Live
+from rich.markdown import Markdown
+
 from runner import Runner
 from mal.openai.model import append_message, chat_completion_chunk_content
+from util.rich import prettier_code_blocks
 
 
 class ChatRunner(Runner):
@@ -9,28 +14,35 @@ class ChatRunner(Runner):
         messages = [
             {
                 "role": "system",
-                "content": "Introduce yourself to someone opening this program for the first time. Be concise."
+                "content": "You are a helpful assistant."
             },
             {
                 "role": "user",
-                "content": "You are a helpful assistant."
+                "content": "Introduce yourself to someone opening this program for the first time. Be concise."
             },
         ]
 
+        prettier_code_blocks()
+        console = Console()
         while True:
-            new_message = ""
+            message = ""
 
             completion = self.create_chat_completion(messages, stream=True)
-            for chunk in completion:
-                s = chat_completion_chunk_content(chunk)
-                print(s or "", end="", flush=True)
-                if s: new_message += s
+            # TODO the `vertical_overflow='visible'` param can provider continuous down scrolling
+            #      but make a mess on up scrolling
+            with Live('', console=console) as live:
+                for chunk in completion:
+                    s = chat_completion_chunk_content(chunk)
+                    if s:
+                        message += s
+                        live.update(Markdown(message))
 
-            print()
-            append_message(messages, "assistant", new_message)
-            print()
+                console.print()
 
-            q = input("> ")
+            append_message(messages, "assistant", message)
+            console.print()
+
+            q = console.input("[bold blue]>[/] ")
             if q in [':q', ':x', ':quit', ':exit', 'bye']: break
             append_message(messages, "user", q)
 
