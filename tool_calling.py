@@ -45,7 +45,11 @@ class ToolCallingRunner(Runner):
                 "function": {
                     "name": "get_current_time",
                     "description": "当你想知道现在的时间时非常有用。",
-                    "parameters": {}
+                    "parameters": {
+                        "type": "object",
+                        "properties": {},
+                        "required": []
+                    }
                 }
             },
             {
