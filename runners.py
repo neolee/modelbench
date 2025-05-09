@@ -5,7 +5,6 @@ from partial_mode import PartialModeRunner
 from prefix_completion import PrefixCompletionRunner
 from fim_completion import FIMCompletion
 from tool_calling import ToolCallingRunner
-from reasoning import ReasoningRunner
 
 
 runners = [
@@ -16,6 +15,5 @@ runners = [
     PartialModeRunner,
     PrefixCompletionRunner,
     FIMCompletion,
-    ToolCallingRunner,
-    ReasoningRunner
+    ToolCallingRunner
 ]

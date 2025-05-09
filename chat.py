@@ -1,9 +1,10 @@
+import re
 from rich.console import Console
 from rich.live import Live
 from rich.markdown import Markdown
 
 from runner import Runner
-from mal.openai.model import append_message, chat_completion_chunk_content
+from mal.openai.model import append_message, chat_completion_chunk_content, chat_completion_chunk_reasoning_content
 from util.rich import prettier_code_blocks
 
 
@@ -19,27 +20,44 @@ class ChatRunner(Runner):
             {
                 "role": "user",
                 "content": "Introduce yourself to someone opening this program for the first time. Be concise."
-            },
+            }
         ]
 
         prettier_code_blocks()
         console = Console()
         while True:
-            message = ""
+            reasoning_content = ""
+            content = ""
+            is_thinking = False
+            is_answering = False
 
             completion = self.create_chat_completion(messages, stream=True)
             # TODO the `vertical_overflow='visible'` param can provider continuous down scrolling
             #      but make a mess on up scrolling
             with Live('', console=console) as live:
                 for chunk in completion:
+                    r = chat_completion_chunk_reasoning_content(chunk)
                     s = chat_completion_chunk_content(chunk)
-                    if s:
-                        message += s
-                        live.update(Markdown(message))
+                    if r:
+                        if not is_thinking:
+                            reasoning_content += "# Think\n"
+                            is_thinking = True
+                        reasoning_content += r
+                        live.update(Markdown(reasoning_content))
+                    elif s:
+                        if not is_answering:
+                            if is_thinking:
+                                reasoning_content += "\n# Answer\n"
+                                is_thinking = False
+                            is_answering = True
+                        s = re.sub(r"<think>", "# Think", s)
+                        s = re.sub(r"</think>", "# Answer", s)
+                        content += s
+                        live.update(Markdown(reasoning_content + content))
 
                 console.print()
 
-            append_message(messages, "assistant", message)
+            append_message(messages, "assistant", content)
             console.print()
 
             q = console.input("[bold blue]>[/] ")

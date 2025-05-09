@@ -9,4 +9,3 @@ Running feature tests on different LLMs easily.
 - Prefix completion
 - FIM (*Fill In the Middle*) completion
 - Tool calling
-- Reasoning (`<thinking>...</thinking>`)
