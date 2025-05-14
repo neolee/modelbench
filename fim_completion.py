@@ -1,8 +1,8 @@
 from rich import print
 
 from runner import Runner
-from mal.providers import provider_by_alias
 from mal.openai.model import completion_text
+import mal.openai.model as m
 
 
 class FIMCompletion(Runner):
@@ -20,5 +20,5 @@ class FIMCompletion(Runner):
 
 
 if __name__ == "__main__":
-    r = FIMCompletion(provider_by_alias("deepseek"))
+    r = FIMCompletion(m.deepseek)
     r.run()
