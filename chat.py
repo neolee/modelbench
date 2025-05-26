@@ -50,8 +50,8 @@ class ChatRunner(Runner):
                                 reasoning_content += "\n# Answer\n"
                                 is_thinking = False
                             is_answering = True
-                        s = re.sub(r"<think>", "# Think", s)
-                        s = re.sub(r"</think>", "# Answer", s)
+                        s = re.sub(r"<think>", "# Think\n", s)
+                        s = re.sub(r"</think>", "\n# Answer\n", s)
                         content += s
                         live.update(Markdown(reasoning_content + content))
 
