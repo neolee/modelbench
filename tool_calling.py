@@ -5,7 +5,7 @@ import json
 from rich import print
 
 from runner import Runner
-from mal.openai.model import chat_completion_content, chat_completion_json, chat_completion_tool_calls, chat_completion_message
+from mal.openai.model import chat_completion_content, chat_completion_tool_calls, chat_completion_message
 
 
 ## tool functions implementation
@@ -96,7 +96,7 @@ class ToolCallingRunner(Runner):
                 tools=tools,
                 parallel_tool_calls=True # `tool_call_id` is required by deepseek
             )
-            print(chat_completion_json(completion))
+            print(chat_completion_message(completion))
             return completion
 
         completion = function_call()
@@ -114,7 +114,10 @@ class ToolCallingRunner(Runner):
             else:
                 output = f(args)
 
-            messages.append(chat_completion_message(completion)) # type: ignore
+            # deepseek r1 support for tool calling, request should not include reasoning_content
+            message = chat_completion_message(completion)
+            if hasattr(message, "reasoning_content"): delattr(message, "reasoning_content")
+            messages.append(message) # type: ignore
             messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
 
             # feed tool's result to model to get more human-like generation
