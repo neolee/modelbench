@@ -4,8 +4,9 @@
 import json
 from rich import print
 
+from mal.openai.client import chat_completion_content, chat_completion_tool_calls, chat_completion_message
+
 from runner import Runner
-from mal.openai.model import chat_completion_content, chat_completion_tool_calls, chat_completion_message
 
 
 ## tool functions implementation

@@ -3,9 +3,12 @@ from rich.console import Console
 from rich.live import Live
 from rich.markdown import Markdown
 
-from runner import Runner
-from mal.openai.model import append_message, chat_completion_chunk_content, chat_completion_chunk_reasoning_content
 from util.rich import prettier_code_blocks
+
+from mal.openai.client import append_message, chat_completion_chunk_content, chat_completion_chunk_reasoning_content
+
+import models as m
+from runner import Runner
 
 
 class ChatRunner(Runner):
@@ -66,5 +69,5 @@ class ChatRunner(Runner):
 
 
 if __name__ == "__main__":
-    r = ChatRunner()
+    r = ChatRunner(m.default)
     r.run()

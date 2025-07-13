@@ -1,8 +1,11 @@
 from rich import print
 from rich.console import Console
 
+from mal.openai.client import Model
+
+from models import models
+
 from menu import show_menu_of
-from mal.openai.model import Model, models
 from runner import Runner
 from runners import runners
 

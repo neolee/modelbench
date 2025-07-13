@@ -1,8 +1,9 @@
 from rich import print
 
+from mal.openai.client import completion_text
+
 from runner import Runner
-from mal.openai.model import completion_text
-import mal.openai.model as m
+import models as m
 
 
 class FIMCompletion(Runner):

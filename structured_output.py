@@ -1,8 +1,9 @@
 import json
 from rich import print
 
+from mal.openai.client import append_message, chat_completion_chunk_content
+
 from runner import Runner
-from mal.openai.model import append_message, chat_completion_chunk_content
 
 
 system_message = """

@@ -1,7 +1,8 @@
 from rich import print
 
+from mal.openai.client import chat_completion_content
+
 from runner import Runner
-from mal.openai.model import chat_completion_content
 
 
 class PrefixCompletionRunner(Runner):
