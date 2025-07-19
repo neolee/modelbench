@@ -7,7 +7,6 @@ from util.rich import prettier_code_blocks
 
 from mal.openai.client import append_message, chat_completion_chunk_content, chat_completion_chunk_reasoning_content
 
-import models as m
 from runner import Runner
 
 
@@ -69,5 +68,5 @@ class ChatRunner(Runner):
 
 
 if __name__ == "__main__":
-    r = ChatRunner(m.default)
+    r = ChatRunner()
     r.run()

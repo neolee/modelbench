@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
 
 import mal.openai.client as c
+import models as m
 
 
 class Runner(ABC):
     description = "Abstract"
 
-    def __init__(self, model):
+    def __init__(self, model=m.default):
         self.model = model
         self.provider = model.provider
 

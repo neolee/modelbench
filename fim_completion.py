@@ -3,7 +3,6 @@ from rich import print
 from mal.openai.client import completion_text
 
 from runner import Runner
-import models as m
 
 
 class FIMCompletion(Runner):
@@ -21,5 +20,5 @@ class FIMCompletion(Runner):
 
 
 if __name__ == "__main__":
-    r = FIMCompletion(m.deepseek)
+    r = FIMCompletion()
     r.run()
