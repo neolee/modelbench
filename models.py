@@ -5,17 +5,15 @@ from mal.openai.client import model_by_provider, model_by_provider_with_model
 deepseek = model_by_provider(mal.deepseek_provider, description="DeepSeek-V3")
 deepseek_reasoner = model_by_provider(mal.deepseek_provider, "reasoner", "DeepSeek-R1")
 
-qwen = model_by_provider(mal.qwen_provider, description="Qwen2.5-Max")
-qwen_coder = model_by_provider(mal.qwen_provider, "coder", "Qwen2.5-Coder-Plus")
-qwen_reasoner = model_by_provider(mal.qwen_provider, "reasoner", "QwQ-Plus")
+qwen = model_by_provider(mal.qwen_provider, description="Qwen Plus")
+qwen_coder = model_by_provider(mal.qwen_provider, "coder", "Qwen-Coder Plus")
 
 kimi_k2 = model_by_provider(mal.moonshot_provider, description="Kimi K2")
 kimi_reasoner = model_by_provider(mal.moonshot_provider, "reasoner", "Kimi Thinking")
 
 openrouter = model_by_provider(mal.openrouter_provider, description="Gemini 2.5 Flash Preview")
-openrouter_gemini_flash = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-flash-preview-05-20", "Gemini 2.5 Flash Preview")
-openrouter_gemini_flash_thinking = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-flash-preview-05-20:thinking", "Gemini 2.5 Flash Preview (thinking)")
-openrouter_gemini_pro = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-pro-preview", "Gemini 2.5 Pro Preview")
+openrouter_gemini_flash = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-flash", "Gemini 2.5 Flash")
+openrouter_gemini_pro = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-pro", "Gemini 2.5 Pro")
 openrouter_grok = model_by_provider_with_model(mal.openrouter_provider, "x-ai/grok-4", "Grok 4")
 openrouter_k2 = model_by_provider_with_model(mal.openrouter_provider, "moonshotai/kimi-k2", "Kimi K2")
 
@@ -29,7 +27,7 @@ lmstudio = model_by_provider(mal.lmstudio_provider, description="LM Studio Defau
 
 ollama = model_by_provider(mal.ollama_provider, description="Ollama Default")
 
-models = [deepseek, deepseek_reasoner, qwen, qwen_coder, qwen_reasoner, kimi_k2,
+models = [deepseek, deepseek_reasoner, qwen, qwen_coder, kimi_k2,
           openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,
           local_qwen, local_qwen_nothink, local_gemma, local_devstral, lmstudio]
 
