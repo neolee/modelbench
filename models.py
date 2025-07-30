@@ -18,8 +18,8 @@ openrouter_grok = model_by_provider_with_model(mal.openrouter_provider, "x-ai/gr
 openrouter_k2 = model_by_provider_with_model(mal.openrouter_provider, "moonshotai/kimi-k2", "Kimi K2")
 
 local = model_by_provider(mal.local_provider, description="Local Default")
+local_qwen_2507 = model_by_provider_with_model(mal.local_provider, "qwen3-2507", "Qwen3-30B-A3B 2507")
 local_qwen = model_by_provider_with_model(mal.local_provider, "qwen3", "Qwen3-30B-A3B")
-local_qwen_nothink = model_by_provider_with_model(mal.local_provider, "qwen3-nothink", "Qwen3-30B-A3B (w/o Thinking)")
 local_devstral = model_by_provider_with_model(mal.local_provider, "devstral", "Devstral Small")
 
 lmstudio = model_by_provider(mal.lmstudio_provider, description="LM Studio Default")
@@ -28,6 +28,6 @@ ollama = model_by_provider(mal.ollama_provider, description="Ollama Default")
 
 models = [deepseek, deepseek_reasoner, qwen, qwen_coder, kimi_k2,
           openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,
-          local_qwen, local_qwen_nothink, local_devstral, lmstudio]
+          local_qwen_2507, local_qwen, local_devstral, lmstudio]
 
 default = deepseek
