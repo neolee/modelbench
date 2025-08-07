@@ -1,12 +1,10 @@
 from rich import print
 
-from mal.openai.client import completion_text
-
 from runner import Runner
 
 
 class FIMCompletion(Runner):
-    description = "FIM Completion"
+    name = "FIM Completion"
 
     def run(self):
         # for now only work on deepseek beta server
@@ -16,7 +14,7 @@ class FIMCompletion(Runner):
             suffix="    return fib(a-1) + fib(a-2)",
             max_tokens=128
         )
-        print(completion_text(completion))
+        print(self.model.completion_text(completion))
 
 
 if __name__ == "__main__":

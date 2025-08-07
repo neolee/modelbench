@@ -1,8 +1,6 @@
 import json
 from rich import print
 
-from mal.openai.client import append_message, chat_completion_chunk_content
-
 from runner import Runner
 
 
@@ -46,8 +44,8 @@ json_schema = {
 class StructuredOutputRunner(Runner):
     def _run_with_response_format(self, response_format):
         messages = []
-        append_message(messages, "system", system_message)
-        append_message(messages, "user", q)
+        self.model.append_message(messages, "system", system_message)
+        self.model.append_message(messages, "user", q)
 
         completion = self.create_chat_completion(
             messages,
@@ -57,7 +55,7 @@ class StructuredOutputRunner(Runner):
 
         result_output = ""
         for chunk in completion:
-            s = chat_completion_chunk_content(chunk)
+            s = self.model.chat_completion_chunk_content(chunk)
             print(s or "", end="", flush=True)
             if s: result_output += s
 
@@ -65,14 +63,14 @@ class StructuredOutputRunner(Runner):
 
 
 class JSONObjectRunner(StructuredOutputRunner):
-    description = "Structured Output Type 1"
+    name = "Structured Output Type 1"
 
     def run(self):
         self._run_with_response_format(json_object)
 
 
 class JSONSchemaRunner(StructuredOutputRunner):
-    description = "Structured Output Type 2"
+    name = "Structured Output Type 2"
 
     def run(self):
         self._run_with_response_format(json_schema)

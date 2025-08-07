@@ -5,13 +5,11 @@ from rich.markdown import Markdown
 
 from util.rich import prettier_code_blocks
 
-from mal.openai.client import append_message, chat_completion_chunk_content, chat_completion_chunk_reasoning_content
-
 from runner import Runner
 
 
 class ChatRunner(Runner):
-    description = "Basic Chat"
+    name = "Basic Chat"
 
     def run(self):
         messages = [
@@ -38,8 +36,8 @@ class ChatRunner(Runner):
             #      but make a mess on up scrolling
             with Live('', console=console) as live:
                 for chunk in completion:
-                    r = chat_completion_chunk_reasoning_content(chunk)
-                    s = chat_completion_chunk_content(chunk)
+                    r = self.model.chat_completion_chunk_reasoning_content(chunk)
+                    s = self.model.chat_completion_chunk_content(chunk)
                     if r:
                         if not is_thinking:
                             reasoning_content += "# Think\n"
@@ -59,12 +57,12 @@ class ChatRunner(Runner):
 
                 console.print()
 
-            append_message(messages, "assistant", content)
+            self.model.append_message(messages, "assistant", content)
             console.print()
 
             q = console.input("[bold blue]>[/] ")
             if q in [':q', ':x', ':quit', ':exit', 'bye']: break
-            append_message(messages, "user", q)
+            self.model.append_message(messages, "user", q)
 
 
 if __name__ == "__main__":

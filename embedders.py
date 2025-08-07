@@ -1,10 +1,9 @@
-from mal.providers import local_provider, qwen_provider
-from mal.openai.embedder import Embedder
+from mal.adapter.openai import Embedder
 
 
-nomic = Embedder(local_provider, "nomic", 768)
-snowflake = Embedder(local_provider, "snowflake", 1024)
-aliyun = Embedder(qwen_provider, "text-embedding-v3", 1024)
+nomic = Embedder("local/nomic", 768)
+snowflake = Embedder("local/snowflake", 1024)
+aliyun = Embedder("qwen/text-embedding-v3", 1024)
 
 
 if __name__ == "__main__":

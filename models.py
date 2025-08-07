@@ -1,29 +1,27 @@
-import mal.providers as mal
-from mal.openai.client import model_by_provider, model_by_provider_with_model
+from mal.adapter.openai import Model
 
 
-deepseek = model_by_provider(mal.deepseek_provider, description="DeepSeek-V3")
-deepseek_reasoner = model_by_provider(mal.deepseek_provider, "reasoner", "DeepSeek-R1")
+deepseek = Model("deepseek/deepseek-chat", name="DeepSeek-V3")
+deepseek_reasoner = Model("deepseek/deepseek-reasoner", name="DeepSeek-R1")
 
-qwen = model_by_provider(mal.qwen_provider, description="Qwen Plus")
-qwen_coder = model_by_provider(mal.qwen_provider, "coder", "Qwen-Coder Plus")
+qwen = Model("qwen/qwen-plus-latest", name="Qwen Plus")
+qwen_coder = Model("qwen/qwen3-coder-plus", "Qwen-Coder Plus")
 
-kimi_k2 = model_by_provider(mal.moonshot_provider, description="Kimi K2")
-kimi_reasoner = model_by_provider(mal.moonshot_provider, "reasoner", "Kimi Thinking")
+kimi_k2 = Model("moonshot/kimi-k2-0711-preview", name="Kimi K2")
+kimi_reasoner = Model("moonshot/kimi-thinking-preview", name="Kimi Thinking")
 
-openrouter = model_by_provider(mal.openrouter_provider, description="Gemini 2.5 Flash Preview")
-openrouter_gemini_flash = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-flash", "Gemini 2.5 Flash")
-openrouter_gemini_pro = model_by_provider_with_model(mal.openrouter_provider, "google/gemini-2.5-pro", "Gemini 2.5 Pro")
-openrouter_grok = model_by_provider_with_model(mal.openrouter_provider, "x-ai/grok-4", "Grok 4")
-openrouter_k2 = model_by_provider_with_model(mal.openrouter_provider, "moonshotai/kimi-k2", "Kimi K2")
+openrouter_gemini_flash = Model("openrouter/google/gemini-2.5-flash", name="Gemini 2.5 Flash")
+openrouter_gemini_pro = Model("openrouter/google/gemini-2.5-pro", name="Gemini 2.5 Pro")
+openrouter_grok = Model("openrouter/x-ai/grok-4", name="Grok 4")
+openrouter_k2 = Model("openrouter/moonshotai/kimi-k2", name="Kimi K2")
 
-local = model_by_provider(mal.local_provider, description="Qwen3-30B-A3B 2507")
-local_reasoner = model_by_provider_with_model(mal.local_provider, "qwen3-thinking", "Qwen3-30B-A3B 2507 (Thinking)")
-local_coder = model_by_provider_with_model(mal.local_provider, "qwen3-coder", "Qwen3-Coder-Flash")
+local = Model("local/qwen3", name="Qwen3-30B-A3B 2507")
+local_reasoner = Model("local/qwen3-thinking", name="Qwen3-30B-A3B 2507 (Thinking)")
+local_coder = Model("local/qwen3-coder", name="Qwen3-Coder-Flash")
 
-lmstudio = model_by_provider(mal.lmstudio_provider, description="LM Studio Default")
+lmstudio = Model("lmstudio/qwen3-30b-a3b-thinking-2507-mlx", name="Qwen3-30B-A3B 2507 (Thinking) MLX")
 
-ollama = model_by_provider(mal.ollama_provider, description="Ollama Default")
+ollama = Model("ollama", name="Ollama Default")
 
 models = [deepseek, deepseek_reasoner, qwen, qwen_coder, kimi_k2,
           openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,

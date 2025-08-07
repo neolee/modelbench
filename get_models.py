@@ -3,7 +3,7 @@ from runner import Runner
 
 
 class GetModelsRunner(Runner):
-    description = "Get Model List"
+    name = "Get Model List"
 
     def run(self):
         print(self.get_models())
