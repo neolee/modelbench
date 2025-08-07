@@ -1,12 +1,10 @@
 from rich import print
 
-from mal.openai.client import chat_completion_content
-
 from runner import Runner
 
 
 class PrefixCompletionRunner(Runner):
-    description = "Prefix Completion"
+    name = "Prefix Completion"
 
     def run(self):
         messages = [
@@ -27,7 +25,7 @@ class PrefixCompletionRunner(Runner):
             is_beta=True,
             stop=["```"]
         )
-        print(chat_completion_content(completion))
+        print(self.model.chat_completion_content(completion))
 
 
 if __name__ == "__main__":

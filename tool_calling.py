@@ -4,8 +4,6 @@
 import json
 from rich import print
 
-from mal.openai.client import chat_completion_content, chat_completion_tool_calls, chat_completion_message
-
 from runner import Runner
 
 
@@ -36,7 +34,7 @@ function_mapper = {
 
 
 class ToolCallingRunner(Runner):
-    description = "Tool Calling"
+    name = "Tool Calling"
 
     def run(self):
         ## tools definition for language model
@@ -97,11 +95,11 @@ class ToolCallingRunner(Runner):
                 tools=tools,
                 parallel_tool_calls=True # `tool_call_id` is required by deepseek
             )
-            print(chat_completion_message(completion))
+            print(self.model.chat_completion_message(completion))
             return completion
 
         completion = function_call()
-        tool_calls = chat_completion_tool_calls(completion)
+        tool_calls = self.model.chat_completion_tool_calls(completion)
         if tool_calls:
             tool_call = tool_calls[0]
             function_name = tool_call.function.name
@@ -116,7 +114,7 @@ class ToolCallingRunner(Runner):
                 output = f(args)
 
             # deepseek r1 support for tool calling, request should not include reasoning_content
-            message = chat_completion_message(completion)
+            message = self.model.chat_completion_message(completion)
             if hasattr(message, "reasoning_content"): delattr(message, "reasoning_content")
             messages.append(message) # type: ignore
             messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
@@ -126,7 +124,7 @@ class ToolCallingRunner(Runner):
                 messages, # type: ignore
                 tools=tools, # type: ignore
             )
-            print(chat_completion_content(completion))
+            print(self.model.chat_completion_content(completion))
 
 
 if __name__ == "__main__":

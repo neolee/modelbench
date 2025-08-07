@@ -1,7 +1,7 @@
 from rich import print
 from rich.console import Console
 
-from mal.openai.client import Model
+from mal.adapter.openai import Model
 
 from models import models
 
@@ -31,13 +31,13 @@ def main():
             runner_class = show_menu_of_runners()
             if not runner_class: break
             runner = runner_class(model) # type: ignore
-            console.rule(f"[bold red]Running {runner_class.description}")
+            console.rule(f"[bold red]Running {runner_class.name}")
             try:
                 runner.run()
             except Exception as e:
-                print(f"'{runner_class.description}' test failed on '{model.description}' (detail below).\n")
+                print(f"'{runner_class.name}' test failed on '{model.name}' (detail below).\n")
                 print(e)
-            console.rule(f"[bold red]End of {runner_class.description}")
+            console.rule(f"[bold red]End of {runner_class.name}")
             print()
 
 

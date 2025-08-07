@@ -1,12 +1,10 @@
 from rich import print
 
-from mal.openai.client import chat_completion_content
-
 from runner import Runner
 
 
 class PartialModeRunner(Runner):
-    description = "Partial Mode"
+    name = "Partial Mode"
 
     def run(self):
         messages = [
@@ -26,7 +24,7 @@ class PartialModeRunner(Runner):
             messages,
             is_beta=True
         )
-        print(chat_completion_content(completion))
+        print(self.model.chat_completion_content(completion))
 
 
 if __name__ == "__main__":
