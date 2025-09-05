@@ -5,9 +5,10 @@ deepseek = Model("deepseek/deepseek-chat", name="DeepSeek-V3")
 deepseek_reasoner = Model("deepseek/deepseek-reasoner", name="DeepSeek-R1")
 
 qwen = Model("qwen/qwen-plus-latest", name="Qwen Plus")
-qwen_coder = Model("qwen/qwen3-coder-plus", "Qwen-Coder Plus")
+qwen_max = Model("qwen/qwen3-max-preview", name="Qwen Max")
+qwen_coder = Model("qwen/qwen3-coder-plus", name="Qwen-Coder Plus")
 
-kimi_k2 = Model("moonshot/kimi-k2-0711-preview", name="Kimi K2")
+kimi_k2 = Model("moonshot/kimi-k2-0905-preview", name="Kimi K2")
 kimi_reasoner = Model("moonshot/kimi-thinking-preview", name="Kimi Thinking")
 
 openrouter_gemini_flash = Model("openrouter/google/gemini-2.5-flash", name="Gemini 2.5 Flash")
@@ -23,7 +24,7 @@ lmstudio = Model("lmstudio/qwen3-30b-a3b-thinking-2507-mlx", name="Qwen3-30B-A3B
 
 ollama = Model("ollama", name="Ollama Default")
 
-models = [deepseek, deepseek_reasoner, qwen, qwen_coder, kimi_k2,
+models = [deepseek, deepseek_reasoner, qwen, qwen_max, qwen_coder, kimi_k2,
           openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,
           local, local_reasoner, local_coder, lmstudio]
 
