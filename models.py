@@ -1,8 +1,8 @@
 from mal.adapter.openai import Model
 
 
-deepseek = Model("deepseek/deepseek-chat", name="DeepSeek-V3")
-deepseek_reasoner = Model("deepseek/deepseek-reasoner", name="DeepSeek-R1")
+deepseek = Model("deepseek/deepseek-chat", name="DeepSeek-V3.2 (Non-thinking)")
+deepseek_reasoner = Model("deepseek/deepseek-reasoner", name="DeepSeek-V3.2")
 
 qwen = Model("qwen/qwen-plus-latest", name="Qwen Plus")
 qwen_max = Model("qwen/qwen3-max-preview", name="Qwen Max")
