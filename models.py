@@ -8,8 +8,8 @@ qwen = Model("qwen/qwen-plus-latest", name="Qwen Plus")
 qwen_max = Model("qwen/qwen3-max-preview", name="Qwen Max")
 qwen_coder = Model("qwen/qwen3-coder-plus", name="Qwen-Coder Plus")
 
-kimi_k2 = Model("moonshot/kimi-k2-0905-preview", name="Kimi K2")
-kimi_reasoner = Model("moonshot/kimi-thinking-preview", name="Kimi Thinking")
+kimi = Model("moonshot/kimi-k2-turbo-preview", name="Kimi K2")
+kimi_reasoner = Model("moonshot/kimi-k2-thinking", name="Kimi K2 Thinking")
 
 openrouter_gemini_flash = Model("openrouter/google/gemini-2.5-flash", name="Gemini 2.5 Flash")
 openrouter_gemini_pro = Model("openrouter/google/gemini-2.5-pro", name="Gemini 2.5 Pro")
@@ -24,7 +24,7 @@ lmstudio = Model("lmstudio/qwen3-30b-a3b-thinking-2507-mlx", name="Qwen3-30B-A3B
 
 ollama = Model("ollama", name="Ollama Default")
 
-models = [deepseek, deepseek_reasoner, qwen, qwen_max, qwen_coder, kimi_k2,
+models = [deepseek, deepseek_reasoner, qwen, qwen_max, qwen_coder, kimi, kimi_reasoner, 
           openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,
           local, local_reasoner, local_coder, lmstudio]
 
