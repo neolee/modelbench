@@ -113,9 +113,7 @@ class ToolCallingRunner(Runner):
             else:
                 output = f(args)
 
-            # deepseek r1 support for tool calling, request should not include reasoning_content
             message = self.model.chat_completion_message(completion)
-            if hasattr(message, "reasoning_content"): delattr(message, "reasoning_content")
             messages.append(message) # type: ignore
             messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
 
