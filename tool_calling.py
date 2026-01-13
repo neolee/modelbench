@@ -13,15 +13,14 @@ from datetime import datetime
 
 # query for weather condition
 #   `arguments`: {"location": "Shanghai"}
-def get_current_weather(arguments):
-    location = arguments["location"]
+def get_current_weather(location, **kwargs):
     info = weather_info(location)
     weather = info["lives"][0]["weather"] if info else "未知"
 
     return f"{location}今天天气是{weather}。"
 
 # query for current time
-def get_current_time():
+def get_current_time(**kwargs):
     current_datetime = datetime.now()
     formatted_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
     return f"当前时间：{formatted_time}。"
@@ -107,20 +106,16 @@ class ToolCallingRunner(Runner):
 
             f = function_mapper[function_name]
             args = json.loads(arguments_string)
-
-            if args == {}:
-                output = f()
-            else:
-                output = f(args)
+            output = f(**args)
 
             message = self.model.chat_completion_message(completion)
-            messages.append(message) # type: ignore
+            messages.append(message)
             messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
 
             # feed tool's result to model to get more human-like generation
             completion = self.create_chat_completion(
-                messages, # type: ignore
-                tools=tools, # type: ignore
+                messages,
+                tools=tools,
             )
             print(self.model.chat_completion_content(completion))
 

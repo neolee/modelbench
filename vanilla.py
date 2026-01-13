@@ -19,7 +19,7 @@ messages = [
 
 completion = client.chat.completions.create(
         model=model_id,
-        messages=messages, # type: ignore
+        messages=messages,
         stream=False
     )
 print(completion.choices[0].message)

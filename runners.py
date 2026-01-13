@@ -7,7 +7,7 @@ from fim_completion import FIMCompletion
 from tool_calling import ToolCallingRunner
 
 
-runners = [
+runners = (
     GetModelsRunner,
     ChatRunner,
     JSONObjectRunner,
@@ -16,4 +16,4 @@ runners = [
     PrefixCompletionRunner,
     FIMCompletion,
     ToolCallingRunner
-]
+)
