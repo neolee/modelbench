@@ -13,20 +13,15 @@ kimi_reasoner = Model("moonshot/kimi-k2-thinking", name="Kimi K2 Thinking")
 
 glm = Model("zhipu/glm-4.7", name="GLM-4.7")
 
-openrouter_gemini_flash = Model("openrouter/google/gemini-2.5-flash", name="Gemini 2.5 Flash")
-openrouter_gemini_pro = Model("openrouter/google/gemini-3-pro-preview", name="Gemini 3 Pro Preview")
+openrouter_gemini_flash = Model("openrouter/google/gemini-2.5-flash", name="Gemini 3 Flash")
+openrouter_gemini_pro = Model("openrouter/google/gemini-3-pro-preview", name="Gemini 3 Pro")
 openrouter_grok = Model("openrouter/x-ai/grok-4.1-fast", name="Grok 4.1 Fast")
 
 local = Model("local/qwen3", name="Qwen3-30B-A3B 2507")
 local_reasoner = Model("local/qwen3-thinking", name="Qwen3-30B-A3B 2507 (Thinking)")
-local_coder = Model("local/qwen3-coder", name="Qwen3-Coder-Flash")
-
-lmstudio = Model("lmstudio/qwen3-30b-a3b-thinking-2507-mlx", name="Qwen3-30B-A3B 2507 (Thinking) MLX")
-
-ollama = Model("ollama", name="Ollama Default")
 
 models = [deepseek, deepseek_reasoner, qwen, qwen_max, qwen_coder, kimi, kimi_reasoner, glm, 
           openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,
-          local, local_reasoner, local_coder, lmstudio]
+          local, local_reasoner]
 
 default = deepseek
