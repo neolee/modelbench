@@ -59,18 +59,20 @@ class StructuredOutputRunner(Runner):
             print(s or "", end="", flush=True)
             if s: result_output += s
 
-        if result_output: print(json.loads(result_output))
+        if result_output:
+            print()
+            print(json.loads(result_output))
 
 
 class JSONObjectRunner(StructuredOutputRunner):
-    name = "Structured Output Type 1"
+    name = "Structured Output (JSON Object)"
 
     def run(self):
         self._run_with_response_format(json_object)
 
 
 class JSONSchemaRunner(StructuredOutputRunner):
-    name = "Structured Output Type 2"
+    name = "Structured Output (JSON Schema)"
 
     def run(self):
         self._run_with_response_format(json_schema)
