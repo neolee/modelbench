@@ -47,17 +47,18 @@ class StructuredOutputRunner(Runner):
         self.model.append_message(messages, "system", system_message)
         self.model.append_message(messages, "user", q)
 
-        completion = self.create_chat_completion(
+        # Use clean completion to filter out <think> tags that break JSON parsing
+        completion = self.model.create_chat_completion_clean(
             messages,
             stream=True,
             response_format=response_format
         )
 
         result_output = ""
-        for chunk in completion:
-            s = self.model.chat_completion_chunk_content(chunk)
-            print(s or "", end="", flush=True)
-            if s: result_output += s
+        for event in completion:
+            if event["type"] == "content":
+                print(event["delta"], end="", flush=True)
+                result_output += event["delta"]
 
         if result_output:
             print()

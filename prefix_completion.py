@@ -20,12 +20,13 @@ class PrefixCompletionRunner(Runner):
             }
         ]
 
-        completion = self.create_chat_completion(
+        result = self.model.create_chat_completion_clean(
             messages,
+            stream=False,
             is_beta=True,
             stop=["```"]
         )
-        print(self.model.chat_completion_content(completion))
+        print(result["content"])
 
 
 if __name__ == "__main__":
