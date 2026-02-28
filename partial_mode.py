@@ -20,11 +20,7 @@ class PartialModeRunner(Runner):
             }
         ]
 
-        result = self.model.create_chat_completion_clean(
-            messages,
-            stream=False,
-            is_beta=True
-        )
+        result = self.model.request_model_contents(messages, stream=False, is_beta=True)
         print(result["content"])
 
 

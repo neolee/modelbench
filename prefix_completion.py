@@ -20,7 +20,7 @@ class PrefixCompletionRunner(Runner):
             }
         ]
 
-        result = self.model.create_chat_completion_clean(
+        result = self.model.request_model_contents(
             messages,
             stream=False,
             is_beta=True,

@@ -113,7 +113,7 @@ class ToolCallingRunner(Runner):
             messages.append({"role": "tool", "tool_call_id": tool_call.id, "content": output})
 
             # feed tool's result to model to get more human-like generation
-            result = self.model.create_chat_completion_clean(
+            result = self.model.request_model_contents(
                 messages,
                 stream=False,
                 tools=tools,

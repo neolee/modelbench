@@ -31,7 +31,7 @@ class ChatRunner(Runner):
             is_answering = False
 
             # Use clean completion to automatically separate reasoning and content
-            completion = self.model.create_chat_completion_clean(messages, stream=True)
+            completion = self.model.request_model_contents(messages, stream=True)
             # TODO the `vertical_overflow='visible'` param can provider continuous down scrolling
             #      but make a mess on up scrolling
             with Live('', console=console) as live:

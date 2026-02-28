@@ -48,7 +48,7 @@ class StructuredOutputRunner(Runner):
         self.model.append_message(messages, "user", q)
 
         # Use clean completion to filter out <think> tags that break JSON parsing
-        completion = self.model.create_chat_completion_clean(
+        completion = self.model.request_model_contents(
             messages,
             stream=True,
             response_format=response_format
