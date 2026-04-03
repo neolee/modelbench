@@ -20,7 +20,7 @@ class PartialModeRunner(Runner):
             }
         ]
 
-        result = self.model.request_model_contents(messages, stream=False, is_beta=True)
+        result = self.model.request_model_contents(messages, is_beta=True, stream=False)
         print(result["content"])
 
 

@@ -4,8 +4,7 @@ from mal.adapter.openai import Model
 deepseek = Model("deepseek/deepseek-chat", name="DeepSeek-V3.2 (Non-thinking)")
 deepseek_reasoner = Model("deepseek/deepseek-reasoner", name="DeepSeek-V3.2")
 
-qwen = Model("qwen/qwen3.5-plus", name="Qwen3.5 Plus")
-qwen_max = Model("qwen/qwen3-max", name="Qwen3 Max")
+qwen = Model("qwen/qwen3.6-plus", name="Qwen3.6 Plus")
 
 kimi = Model("moonshot/kimi-k2-turbo-preview", name="Kimi K2")
 kimi_reasoner = Model("moonshot/kimi-k2.5", name="Kimi K2.5")
@@ -26,7 +25,7 @@ omlx_qwen_27b = Model("omlx/Qwen3.5-27B-Text-heretic-mxfp4-mlx", "Qwen3.5-27B ML
 
 lms = Model("lmstudio/qwen3.5-35b-a3b-mlx-lm", name="Qwen3.5-35B-A3B MLX")
 
-models = [deepseek, deepseek_reasoner, qwen, qwen_max, kimi, kimi_reasoner, glm, 
+models = [deepseek, deepseek_reasoner, qwen, kimi, kimi_reasoner, glm, 
           gpt, openrouter_gemini_flash, openrouter_gemini_pro, openrouter_grok,
           local, local_reasoner, omlx_qwen_35b, omlx_qwen_27b]
 

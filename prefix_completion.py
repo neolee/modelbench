@@ -22,8 +22,8 @@ class PrefixCompletionRunner(Runner):
 
         result = self.model.request_model_contents(
             messages,
-            stream=False,
             is_beta=True,
+            stream=False,
             stop=["```"]
         )
         print(result["content"])
